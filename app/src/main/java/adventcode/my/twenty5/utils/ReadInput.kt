@@ -76,4 +76,13 @@ fun isRepeatedSequenceForAny(n: Long): Boolean {
 
     return false
 }
+/*
+Notes:
+s = "9999"
+        len = 4
+        for(k in 1 .. 2)
+             4 % 1 == 0
+        block = 9
+        repeated  = 9.repeat(4) = 9999
 
+ */
