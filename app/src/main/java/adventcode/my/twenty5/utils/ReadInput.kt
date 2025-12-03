@@ -1,4 +1,5 @@
 package adventcode.my.twenty5.utils
+import java.math.BigInteger
 
 fun readInput(fileName:String):String{
     val text = java.io.File("app/src/main/resources/$fileName").readText()
@@ -11,7 +12,65 @@ fun readInputAsArray(fileName: String): Array<String> {
         .toTypedArray()
 }
 
+fun readLinesAsList(fileName: String): List<String> {
+    return java.io.File("app/src/main/resources/$fileName").readLines()
+}
+
+fun convertStringToCharArray(input:String):CharArray {
+   return input.toCharArray()
+}
+
+fun generateAllTwoDigitPairsAsInts(input: String): List<Int> {
+    val result = mutableListOf<Int>()
+
+    for (i in 0 until input.length - 1) {
+        val a = input[i]
+        for (j in i + 1 until input.length) {
+            val b = input[j]
+            result.add("$a$b".toInt())
+        }
+    }
+
+    return result
+}
+
+
+
+fun largest12DigitBig(input: String): BigInteger {
+    return input
+        .windowed(12)
+        .maxOf { BigInteger(it) }
+}
+
 fun convertArrayToList(inputArray:Array<String>) = inputArray.toMutableList()
+
+
+fun largest12Digit(input: String): String {
+    var best = ""  // this will hold the best 12-digit number seen so far
+
+    for (digit in input) {
+        // Add the new digit to the existing best
+        val candidate = best + digit
+
+        if (candidate.length <= 12) {
+            // If length ≤ 12, simply keep adding digits
+            best = candidate
+        } else {
+            // If length > 12, we must drop exactly ONE digit.
+            // We try all ways of removing one digit and keep the largest.
+            var max12 = 0L
+            for (i in candidate.indices) {
+                val removedOne = (candidate.removeRange(i, i + 1)).toLong()
+                if (removedOne > max12) max12 = removedOne
+            }
+            best = max12.toString()
+        }
+    }
+
+    return best
+}
+
+
 fun parseRange(input: String): Pair<Long, Long> {
    // println("ParseRange is $input")
     val parts = input.split("-")
