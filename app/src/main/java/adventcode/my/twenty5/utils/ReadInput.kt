@@ -145,3 +145,42 @@ s = "9999"
         repeated  = 9.repeat(4) = 9999
 
  */
+
+fun printAdjacent(grid: List<String>) {
+
+    // 8 surrounding directions
+    val directions = listOf(
+        -1 to -1,   // top-left
+        -1 to  0,   // top
+        -1 to  1,   // top-right
+        0 to -1,   // left
+        0 to  1,   // right
+        1 to -1,   // bottom-left
+        1 to  0,   // bottom
+        1 to  1    // bottom-right
+    )
+
+    val rows = grid.size
+    val cols = grid[0].length
+
+    for (r in 0 until rows) {
+        for (c in 0 until cols) {
+
+            println("Cell ($r,$c) = '${grid[r][c]}'")
+
+            for ((dr, dc) in directions) {
+                val nr = r + dr
+                val nc = c + dc
+
+                if (nr in 0 until rows && nc in 0 until cols) {
+                    println("    Neighbor at ($nr,$nc) = '${grid[nr][nc]}'")
+                } else {
+                    println("    Neighbor at ($nr,$nc) = OUT OF GRID")
+                }
+            }
+
+            println("--------------------------------")
+        }
+    }
+}
+
