@@ -283,3 +283,18 @@ fun printAdjacentForFilteredCharacterAndReturnUpdatedList(grid:List<String>,filt
     println("result")
     return Pair(globalCount, result)
 }
+//Day 5
+fun searchInputInRange(input:String,start:String,end:String):Pair<Long,String>{
+    // println("Input is $input start is $start and end is $end")
+    val convertedInput = input.toLong()
+    val convertedStart = start.toLong()
+    val convertedEnd = end.toLong()
+    // println("Converted Input is $convertedInput start is $convertedStart and end is $convertedEnd")
+    if(convertedInput in convertedStart .. convertedEnd){
+        //println("$convertedInput exists betwen $convertedStart and $convertedEnd ")
+        return Pair(convertedInput,"Exists")
+    }else{
+        //println("$convertedInput does not exists betwen $convertedStart and $convertedEnd ")
+        return Pair(0L,"Exists")
+    }
+}
