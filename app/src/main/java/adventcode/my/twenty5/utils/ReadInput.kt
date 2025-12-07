@@ -184,6 +184,40 @@ fun printAdjacent(grid: List<String>) {
     }
 }
 
+fun performVerticalGridOperation(grid: List<String>){
+    var finalTotal = 0L
+    val matrix = grid.map { row ->
+        row.trim().split(Regex("\\s+"))
+    }
+    val rows = matrix.size
+    val cols = matrix[0].size   // number of columns
+
+    for (col in 0 until cols) {
+        println("Column $col :")
+        val operator = matrix[rows - 1][col]
+        println("operator is $operator")
+        val numbers = matrix.dropLast(1).map { it[col] }
+        println("Numbers is $numbers")
+        val result  = applyOperation(numbers, operator)
+        finalTotal += result
+        println("Column $col → operator '$operator' → result = $result")
+
+    }
+    println("Final Total is $finalTotal")
+    }
+fun applyOperation(values: List<String>, op: String): Long {
+    println("Values and operator is $values and $op")
+    val nums = values.map { it.toLong() }  // convert all to Int
+
+    return when (op) {
+        "+"  -> nums.sum()
+        "*"  -> nums.reduce { a, b -> a * b }
+        "-"  -> nums.reduce { a, b -> a - b }
+        "/"  -> nums.reduce { a, b -> a / b }
+        else -> error("Unknown operator $op")
+    }
+}
+
 fun printAdjacentForFilteredCharacter(grid:List<String>,filteredCharacter:Char = '@') : Int {
 
 
